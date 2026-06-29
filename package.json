@@ -1,0 +1,13 @@
+{
+  "name": "student-record-management",
+  "version": "1.0.0",
+  "description": "Student Record Management System (MERN Stack)",
+  "scripts": {
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"server,client\" -c \"yellow,blue\" \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

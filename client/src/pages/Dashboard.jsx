@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, School, Calendar, UserPlus, Clock, ArrowRight } from 'lucide-react';
+import { Users, School, Calendar, UserPlus, Clock, ArrowRight, AlertCircle } from 'lucide-react';
 import { getStudents } from '../services/api';
 
 const Dashboard = () => {
