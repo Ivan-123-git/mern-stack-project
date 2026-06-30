@@ -8,6 +8,33 @@ const API = axios.create({
   },
 });
 
+// Dynamic getter for the Auth Token (set by the React app on mount/auth change)
+let getAuthToken = null;
+
+export const setGetToken = (fn) => {
+  getAuthToken = fn;
+};
+
+// Request Interceptor to inject Clerk Session JWT
+API.interceptors.request.use(
+  async (config) => {
+    if (getAuthToken) {
+      try {
+        const token = await getAuthToken();
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+      } catch (err) {
+        console.error('Error retrieving Clerk token in API interceptor:', err);
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // Fetch all students
 export const getStudents = async () => {
   try {
